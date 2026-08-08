@@ -1,0 +1,73 @@
+# Unity generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# Asset meta data should NOT be ignored
+# *.meta
+
+# Visual Studio / Rider / IDE
+.vs/
+.vscode/
+.idea/
+
+*.csproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.tmp
+*.opendb
+*.VC.db
+
+# Unity generated files
+sysinfo.txt
+
+# Crash reports
+sysinfo.txt
+crashlytics-build.properties
+
+# Build files
+*.apk
+*.aab
+*.unitypackage
+
+# Gradle
+.gradle/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# Unity Plastic SCM
+.plastic/
+
+# Unity temporary / backup files
+*.bak
+*.tmp
+
+# Addressables generated data
+/[Aa]ssets/[Aa]ddressable[Aa]ssets[Dd]ata/*/*.bin*
+
+# Uncomment if you don't want Addressables builds in Git
+# /[Ss]erver[Dd]ata/
+
+# Auto-generated StreamingAssets files
+/[Aa]ssets/[Ss]treamingAssets/aa.meta
+/[Aa]ssets/[Ss]treamingAssets/aa/*
