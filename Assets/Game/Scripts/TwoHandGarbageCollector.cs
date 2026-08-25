@@ -5,8 +5,8 @@ public class TwoHandGarbageCollector : MonoBehaviour
     public Transform leftkleshnya;
     public Transform rightkleshnya;
     public float pickupRange = 4f;
-    private FreeTrash leftItem;
-    private FreeTrash rightItem;
+    private GarbageItem leftItem;
+    private GarbageItem rightItem;
     public bool LeftHandFree => leftItem == null;
     public bool RightHandFree => rightItem == null;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -22,11 +22,11 @@ public class TwoHandGarbageCollector : MonoBehaviour
        HandleHand(0, leftkleshnya, ref leftItem);
        HandleHand(1, rightkleshnya, ref rightItem); 
     }
-    void HandleHand(int mouseButton, Transform Hand, ref FreeTrash heldTrash)
+    void HandleHand(int mouseButton, Transform Hand, ref GarbageItem heldTrash)
     {
         if (Input.GetMouseButtonDown(mouseButton))
         {
-            FreeTrash candidate = FindNearestFreeTrash();
+            GarbageItem candidate = FindNearestFreeTrash();
             if (candidate != null)
             {
                 heldTrash = candidate;
@@ -34,14 +34,14 @@ public class TwoHandGarbageCollector : MonoBehaviour
             }        
         }
     }
-    private FreeTrash FindNearestFreeTrash()
+    private GarbageItem FindNearestFreeTrash()
     {
       Collider[] hits = Physics.OverlapSphere (transform.position, pickupRange, ~0, QueryTriggerInteraction.Ignore); 
-      FreeTrash nearest = null;
+      GarbageItem nearest = null;
       float NearestDistance = float.MaxValue;
       foreach (Collider hit in hits)
         {
-            FreeTrash item = hit.GetComponentInParent<FreeTrash>();
+            GarbageItem item = hit.GetComponentInParent<GarbageItem>();
             if (item == null) continue;
             float distance = (item.transform.position - transform.position).sqrMagnitude;
             if (distance < NearestDistance)
