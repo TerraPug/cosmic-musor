@@ -358,6 +358,7 @@ GameObject:
   - component: {fileID: 143372462}
   - component: {fileID: 143372464}
   - component: {fileID: 143372463}
+  - component: {fileID: 143372465}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -1265,6 +1266,8 @@ GameObject:
   - component: {fileID: 813903219}
   - component: {fileID: 813903218}
   - component: {fileID: 813903217}
+  - component: {fileID: 813903221}
+  - component: {fileID: 813903222}
   m_Layer: 0
   m_Name: Trash
   m_TagString: Untagged
@@ -1874,6 +1877,8 @@ GameObject:
   - component: {fileID: 1530322347}
   - component: {fileID: 1530322346}
   - component: {fileID: 1530322345}
+  - component: {fileID: 1530322349}
+  - component: {fileID: 1530322350}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -2758,6 +2763,94 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2026304059}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &143372465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 143372455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d9657763eda6c143b1702b1a7f3f4b8, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::TwoHandGarbageCollector
+  leftkleshnya: {fileID: 42635668}
+  rightkleshnya: {fileID: 448773101}
+  pickupRange: 4
+--- !u!54 &813903221
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813903216}
+  serializedVersion: 5
+  m_Mass: 1
+  m_LinearDamping: 0
+  m_AngularDamping: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!114 &813903222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 813903216}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4275b7a2f4728ff4195d9097936c6270, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::GarbageItem
+
+--- !u!65 &1530322349
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530322344}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.2, y: 3, z: 1.2}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1530322350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1530322344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 453d8bc477760cb438947b378b82fc70, type: 3}
+  m_Name:
+  m_EditorClassIdentifier: Assembly-CSharp::TrashController
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
