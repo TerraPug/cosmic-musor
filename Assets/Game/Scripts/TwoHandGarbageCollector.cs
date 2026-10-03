@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class TwoHandGarbageCollector : MonoBehaviour
 {   
+    public Rigidbody body;
     public Transform leftkleshnya;
     public Transform rightkleshnya;
     public float pickupRange = 4f;
@@ -12,7 +13,7 @@ public class TwoHandGarbageCollector : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+       body = GetComponent<Rigidbody>(); 
     }
 
     // Update is called once per frame
@@ -52,5 +53,18 @@ public class TwoHandGarbageCollector : MonoBehaviour
         }
 
         return nearest;
+    }
+    private void OnDisable()
+    {
+        ReleaseItem(ref leftItem);
+        ReleaseItem(ref rightItem);
+    }
+    private void ReleaseItem(ref GarbageItem item)
+    {
+        if (item != null)
+        {
+            item.Release(body)
+        }
+        item = null;
     }
 }
