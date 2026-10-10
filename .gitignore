@@ -18,6 +18,8 @@
 .idea/
 
 *.csproj
+!Tests/InputContract/InputContract.csproj
+Tests/**/bin/
 *.sln
 *.suo
 *.user

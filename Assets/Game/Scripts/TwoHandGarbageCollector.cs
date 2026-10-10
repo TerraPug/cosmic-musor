@@ -20,6 +20,12 @@ public class TwoHandGarbageCollector : MonoBehaviour
 
     private void Update()
     {
+        if (!Application.isFocused || Cursor.lockState != CursorLockMode.Locked || SpaceGameInput.EscapePressed)
+        {
+            ReleaseItem(ref leftItem);
+            ReleaseItem(ref rightItem);
+            return;
+        }
         HandleHand(0, leftkleshnya, ref leftItem);
         HandleHand(1, rightkleshnya, ref rightItem);
     }
@@ -51,11 +57,11 @@ public class TwoHandGarbageCollector : MonoBehaviour
         // Предмет удерживается только пока зажата соответствующая кнопка.
         if (heldTrash != null)
         {
-            if (!Input.GetMouseButton(mouseButton)) ReleaseItem(ref heldTrash);
+            if (!SpaceGameInput.MouseHeld(mouseButton)) ReleaseItem(ref heldTrash);
             return;
         }
 
-        if (hand == null || !Input.GetMouseButtonDown(mouseButton)) return;
+        if (hand == null || !SpaceGameInput.MousePressed(mouseButton)) return;
         GarbageItem candidate = FindNearestFreeTrash();
         if (candidate == null) return;
         candidate.Grab(hand);

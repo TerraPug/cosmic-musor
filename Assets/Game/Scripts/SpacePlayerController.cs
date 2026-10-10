@@ -11,6 +11,7 @@ public class SpacePlayerController : MonoBehaviour
     private Rigidbody body;
     private float pitch;
     private float yaw;
+    private Vector3 movementInput;
 
     public Vector3 Velocity => body != null ? body.linearVelocity : Vector3.zero;
 
@@ -31,15 +32,18 @@ public class SpacePlayerController : MonoBehaviour
         pitch = angles.x;
         yaw = angles.y;
     }
-private void Update()
+    private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        movementInput = Vector3.zero;
+        if (!Application.isFocused) return;
+        if (SpaceGameInput.EscapePressed)
         {
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
+            return;
         }
 
-        if (Input.GetMouseButtonDown(0) && Cursor.lockState != CursorLockMode.Locked)
+        if (SpaceGameInput.MousePressed(0) && Cursor.lockState != CursorLockMode.Locked)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
@@ -50,25 +54,38 @@ private void Update()
             return;
         }
 
-        yaw += Input.GetAxis("Mouse X") * mouseSensitivity;
-        pitch -= Input.GetAxis("Mouse Y") * mouseSensitivity;
+        movementInput = SpaceGameInput.Movement;
+        Vector2 look = SpaceGameInput.Look;
+        yaw += look.x * mouseSensitivity;
+        pitch -= look.y * mouseSensitivity;
         pitch = Mathf.Clamp(pitch, -85f, 85f);
         transform.rotation = Quaternion.Euler(pitch, yaw, 0f);
     }
 
     private void FixedUpdate()
     {
-        float vertical = 0f;
-        if (Input.GetKey(KeyCode.Space)) vertical += 1f;
-        if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.C)) vertical -= 1f;
-
-        Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), vertical, Input.GetAxisRaw("Vertical"));
-        input = Vector3.ClampMagnitude(input, 1f);
-        body.AddForce(transform.TransformDirection(input) * acceleration, ForceMode.Acceleration);
+        body.AddForce(transform.TransformDirection(movementInput) * acceleration, ForceMode.Acceleration);
 
         if (body.linearVelocity.sqrMagnitude > maxSpeed * maxSpeed)
         {
             body.linearVelocity = body.linearVelocity.normalized * maxSpeed;
         }
+    }
+
+    private void OnApplicationFocus(bool hasFocus)
+    {
+        if (!hasFocus) ReleaseControl();
+    }
+
+    private void OnDisable()
+    {
+        ReleaseControl();
+    }
+
+    private void ReleaseControl()
+    {
+        movementInput = Vector3.zero;
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
     }
 }
